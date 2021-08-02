@@ -98,27 +98,31 @@ buy_price, sell_price, macd_signal = implement_macd_strategy(schien_df['Close'],
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-ax1 = plt.subplot2grid((8,1), (0,0), rowspan = 5, colspan = 1)
-ax2 = plt.subplot2grid((8,1), (5,0), rowspan = 3, colspan = 1)
+def main():
+    ax1 = plt.subplot2grid((8,1), (0,0), rowspan = 5, colspan = 1)
+    ax2 = plt.subplot2grid((8,1), (5,0), rowspan = 3, colspan = 1)
 
-ax1.plot(schien_df['Close'], color = 'skyblue', linewidth = 2, label = symbol_input)
-ax1.plot(schien_df.index, buy_price, marker = '^', color = 'green', markersize = 10, label = 'BUY SIGNAL', linewidth = 0)
-ax1.plot(schien_df.index, sell_price, marker = 'v', color = 'r', markersize = 10, label = 'SELL SIGNAL', linewidth = 0)
-ax1.legend()
-title_given=symbol_input + " MACD SIGNALS"
-ax1.set_title(title_given)
-ax2.plot(schien_macd['macd'], color = 'grey', linewidth = 1.5, label = 'MACD')
-ax2.plot(schien_macd['signal'], color = 'skyblue', linewidth = 1.5, label = 'SIGNAL')
+    ax1.plot(schien_df['Close'], color = 'skyblue', linewidth = 2, label = symbol_input)
+    ax1.plot(schien_df.index, buy_price, marker = '^', color = 'green', markersize = 10, label = 'BUY SIGNAL', linewidth = 0)
+    ax1.plot(schien_df.index, sell_price, marker = 'v', color = 'r', markersize = 10, label = 'SELL SIGNAL', linewidth = 0)
+    ax1.legend()
+    title_given=symbol_input + " MACD SIGNALS"
+    ax1.set_title(title_given)
+    ax2.plot(schien_macd['macd'], color = 'grey', linewidth = 1.5, label = 'MACD')
+    ax2.plot(schien_macd['signal'], color = 'skyblue', linewidth = 1.5, label = 'SIGNAL')
 
-for i in range(len(schien_macd)):
-    if str(schien_macd['hist'][i])[0] == '-':
-        ax2.bar(schien_macd.index[i], schien_macd['hist'][i], color = '#ef5350')
-    else:
-        ax2.bar(schien_macd.index[i], schien_macd['hist'][i], color = '#26a69a')
-        
-plt.legend(loc = 'lower right')
-plt.show()
-try:
-    st.pyplot()
-except Exception as E:
-    pass
+    for i in range(len(schien_macd)):
+        if str(schien_macd['hist'][i])[0] == '-':
+            ax2.bar(schien_macd.index[i], schien_macd['hist'][i], color = '#ef5350')
+        else:
+            ax2.bar(schien_macd.index[i], schien_macd['hist'][i], color = '#26a69a')
+
+    plt.legend(loc = 'lower right')
+    plt.show()
+    try:
+        st.pyplot()
+    except Exception as E:
+        pass
+
+if __name__=='__main__': 
+    main()
