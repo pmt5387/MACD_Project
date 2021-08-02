@@ -1,0 +1,7 @@
+nsepy==0.8
+pandas==1.2.4
+numpy==1.20.3
+matplotlib==3.4.2
+streamlit==0.80.0
+termcolor==1.1.0
+requests==2.24.0
